@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 
+app.use(express.static('public'));
+
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
     // Note that we save the animalsArray as filteredResults here:
@@ -89,8 +91,8 @@ function filterByQuery(query, animalsArray) {
     return true;
   }
 
-  app.get('/' ,(req,res) => {
-    res.send("Welcome to the Zoo!")
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
   });
 
   app.get('/api/animals/:id', (req,res) => {
